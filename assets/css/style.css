@@ -29,6 +29,15 @@ input[type=radio] {
 p {
     font-family:'Rokkitt', serif;
 }
+#time-left{
+   width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFEB3B;
+}
 /* Quiz Classes */
  .quizContainer {
     background-color: #009688;
@@ -65,15 +74,13 @@ p {
   padding: 20px;
 }
 .quizMessage {
-    background-color: lightgrey;
-    border-radius: 6px;
     width: 80%;
     margin: auto;
     text-align: center;
     padding: 10px;
-    font-size: 25px;
+    font-size: 15px;
     font-weight: bold;
-    color: red;
+    color: #FFEB3B;
 }
 .choiceList {
   width: 50%;

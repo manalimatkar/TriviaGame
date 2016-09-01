@@ -26,15 +26,17 @@ var questions = [{
 var currentQuestion = 0;
 var correctAnswers = 0;
 var quizOver = false;
-
+// Set our number counter to 100.
+var number = 20;
 
 // On Document Ready 
 $(document).ready(function () {
 
     // Display the first question
-    displayCurrentQuestion();
+    displayCurrentQuestion();    
+
     //Hide quiz message div
-    $(this).find(".quizMessage").hide();
+    //$(this).find(".quizMessage").hide();
 
     // On clicking next, display the next question verify if the quiz is over if not get the value of current Answer
 
@@ -61,14 +63,19 @@ $(document).ready(function () {
                 currentQuestion++; //Increment cointer to Point to the next question
                 //check if end of question array is reached if not call displayCurrentQuestion
                 if (currentQuestion < questions.length) {
-
+                    clearInterval(counter);
+                    number = 20;
                     displayCurrentQuestion();
 
                 } else {
+                    $('#time-left').html('');
                     //Call displayScore if no more questions left
                     displayScore();
+
                     //change button text to play again
                     $(document).find(".nextButton").text("Play Again?");
+                    clearInterval(counter);
+                    number = 20;
                     //set the quizOver to true
                     quizOver = true;
                 }
@@ -105,6 +112,9 @@ function displayCurrentQuestion() {
         choice = questions[currentQuestion].choices[i];
         $('<li><input type="radio" value=' + i + ' name="dynradio" />' + choice + '</li>').appendTo(choiceList);
     }
+
+    runTimer();
+       
 }
 
 function resetQuiz() {
@@ -121,3 +131,48 @@ function displayScore() {
 function hideScore() {
     $(document).find(".result").hide();
 }
+
+function runTimer(){
+
+            counter = setInterval(decrement, 100);
+        }
+
+        // The decremeent function.
+        function decrement(){
+            // Decrease number by one.
+            number--;
+            // Show the number in the #show-number tag.
+            $('#time-left').html('<h2> You have ' + number + ' Seconds to answer</h2>');
+
+            // Once number hits zero...
+            if (number === 0){
+
+                // Alert the user that time is up.
+                $('#time-left').html('Time Up !!!!');
+                // ...run the stop function.
+                stop();
+               
+            }
+        }
+// The stop function
+        function stop(){
+            // Clears our "counter" interval.
+            // We just pass the name of the interval
+            // to the clearInterval function.
+            clearInterval(counter);
+            number = 20;
+            currentQuestion++;
+     //Increment cointer to Point to the next question
+     //check if end of question array is reached if not call displayCurrentQuestion
+        if (currentQuestion < questions.length) {
+              displayCurrentQuestion();
+              $('#time-left').html('');
+        } else {
+         //Call displayScore if no more questions left
+          displayScore();
+         //change button text to play again
+         $(document).find(".nextButton").text("Play Again?");
+         //set the quizOver to true
+         quizOver = true;
+        }
+        }
