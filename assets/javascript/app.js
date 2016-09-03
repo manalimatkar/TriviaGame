@@ -134,7 +134,7 @@ function hideScore() {
 
 function runTimer(){
 
-            counter = setInterval(decrement, 100);
+            counter = setInterval(decrement, 1000);
         }
 
         // The decremeent function.
